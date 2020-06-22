@@ -1,70 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>todolist</title>
-    <link rel="stylesheet" href="index.css">
+    <title>简单的计算器</title>
 </head>
-
 <body>
 
     <div id="app">
-        <div class="header">
-            <div class="container">
-                <div class="logo">toDoList</div>
-                <div class="input-area">
-                    <input 
-                        type="text" 
-                        @input='handleInput' 
-                        :value='curMask'>
-                    <button @click='addMask'>添加</button>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <h2>
-                <span>正在进行</span>
-                <span class="mask-num">{{ needDoList.length }}</span>
-            </h2>
-            <ul class="mask-list">
-                <li 
-                    v-for='(mask, index) in needDoList' 
-                    :key='mask.id'>
-                    <div>
-                        <input 
-                            type="checkbox" 
-                            @change='doCheck(index,"need")'>
-                        <span>{{ mask.title }}</span>
-                    </div>
-                    <button @click='deleteMask(index,"need")'>删除</button>
-                </li>
-            </ul>
-        </div>
-        <div class="container">
-            <h2>
-                <span>已完成</span>
-                <span class="mask-num">{{ completeList.length }}</span>
-            </h2>
-            <ul class="mask-list complete-list">
-                <li 
-                    v-for='(mask, index) in completeList' 
-                    :key='mask.id'>
-                    <div>
-                        <input 
-                            type="checkbox" 
-                            @change='doCheck(index,"templete")'>
-                        <span>{{ mask.title }}</span>
-                    </div>
-                    <button @click='deleteMask(index,"complete")'>删除</button>
-                </li>
-            </ul>
-        </div>
+        <input type="text" v-model.number.lazy='num1'>
+        <select name="" id="" v-model='type'>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model.number.lazy='num2'>
+        <button @click='handleClick'>=</button>
+        <span>{{ result }}</span>
     </div>
 
     <script src="vue.js"></script>
     <script src="index.js"></script>
+    
 </body>
-
 </html>

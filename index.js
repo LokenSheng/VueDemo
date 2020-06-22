@@ -1,37 +1,28 @@
-
 const vm = new Vue({
     el: '#app',
     data: {
-       curMask:'',
-       needDoList: [],
-       completeList: [] 
+        num1: 0,
+        num2: 0,
+        type: '+',
+        result: 0
     },
     methods: {
-        handleInput (e) {
-            this.curMask = e.target.value;
-        },
-        addMask () {
-            if(this.curMask==='') {
-                return;
+        handleClick() {
+            const { type, num1, num2 } = this;
+            switch (type) {
+                case '+':
+                    this.result = num1 + num2;
+                    break;
+                case '-':
+                    this.result = num1 - num2;
+                    break;
+                case '*':
+                    this.result = num1 * num2;
+                    break;
+                case '/':
+                    this.result = num1 / num2;
+                    break;
             }
-            this.needDoList.push({
-                title: this.curMask,
-                id: Math.random()
-            });
-            this.curMask = '';
-        },
-        deleteMask (index, type) {
-            const toDoList = type === 'need' ? this.needDoList : this.completeList;
-          toDoList.splice(index, 1);
-        },
-        doCheck (index, type) {
-            if(type === 'need') {
-                const completeMask = this.needDoList.splice(index, 1);
-                this.completeList.push(...completeMask);
-              } else {
-                const noCompleteMask = this.completeList.splice(index, 1);
-                this.needDoList.push(...noCompleteMask);
-              }
         }
     }
-});
+})
