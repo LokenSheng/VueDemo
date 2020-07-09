@@ -4,45 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>姓名筛选</title>
+    <title>仿百度联想词搜索</title>
     <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-
     <div id="app">
-        <div class="control">
-          <input type="text" class="search" v-model="filterText">
-          <div>
-            <span 
-              class="option" 
-              :class="{
-                'active': optionActive[index]
-              }"
-              v-for="(option, index) in controlOptions"
-              @click="filterBySex(index, option)"
-            >
-              {{ option }}
-            </span>
-          </div>
+        <div class="logo">
+            <img src="https://www.baidu.com/img/bd_logo1.png?where=super" title="点击一下，了解更多">
         </div>
-        <ul>
-          <li 
-            class="person"
-            v-for="person in personList"
-            :key="person.id"
-          >
-            <div class="avatar">
-              <img :src="person.src" :alt="person.des">
-            </div>
-            <div class="content">
-              <span class="name">{{ person.name }}</span>
-              <span class="des">{{ person.des }}</span>
-            </div>
-          </li>
-        </ul>
-      </div>
 
+        <div class="search-box">
+            <span class="search-area">
+                <input type="text" maxlength="100" v-model="inputVal" @focus="() => inputFocus = true"
+                    @blur="() => inputFocus = false">
+                <span class="icon icon-paizhao"></span>
+            </span>
+            <span class="search-btn">百度一下</span>
+        </div>
+
+        <ul class="search-list" v-show="inputFocus && searchResList.length">
+            <li v-for="res in searchResList" :key="res">
+                {{ res }}
+            </li>
+        </ul>
+    </div>
+
+    <script src="jquery.js"></script>
     <script src="vue.js"></script>
     <script src="index.js"></script>
 </body>
